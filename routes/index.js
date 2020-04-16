@@ -2,8 +2,9 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req,res) => {
-  res.send('Hello World');
-})
+//Rutas para X
+const x = require("../controllers/index.controller");
+
+router.get('/', x.getHelloWorld);
 
 module.exports = router;
