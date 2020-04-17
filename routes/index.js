@@ -2,9 +2,8 @@
 const express = require('express');
 const router = express.Router();
 
-//Rutas para X
-const x = require("../controllers/index.controller");
-
-router.get('/', x.getHelloWorld);
+// Endpoints de usuarios
+const user_routes = require("../controllers/user.ctl.js");
+router.get('/', user_routes.getUsers);
 
 module.exports = router;
