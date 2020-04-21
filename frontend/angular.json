@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "alie-sell"
+    }
+  },
+  "defaultProject": "alie-sell",
+  "cli": {
+    "analytics": "3f27fbf0-3043-4d70-9830-13a7c4de9d91"
+  }
 }
