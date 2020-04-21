@@ -1,0 +1,64 @@
+<div class="black">
+  <button class="btn" (click)=" toggleTitle()">
+    {{showTitle ? "Hide Title" : "Show Title"}}
+  </button>
+  <h1 *ngIf = "showTitle">
+    {{title}}
+  </h1>
+  <p>
+    {{email}}
+  </p>
+  <form (submit)="newHobby(hobby)">
+    <p>Inserte Hobbie:</p>
+    <input #hobby type="text" name="hobby" placeholder="hobby">
+  </form>
+  <h3> Hobbies: </h3>
+  <ul>
+    <li *ngFor = "let hob of hobbies">
+      {{hob}}
+    </li>
+  </ul>
+</div>
+
+//----------------app component
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  title: string;
+  email: string;
+  showTitle: boolean;
+  hobbies: string[];
+  postData = {
+    test: 'my content',
+  };
+  url = 'http://httpbin.org/post';
+
+  constructor(private http:HttpClient){
+    this.title = "alie-sell"
+    this.email = "jvmonteros98@gmail.com"
+    this.hobbies = ["jeux-videos","promenade"]
+    this.http.post(this.url,this.postData).toPromise().then(data => {
+      console.log(data);
+    })
+
+  }
+
+  toggleTitle()
+  {
+    this.showTitle = !this.showTitle;
+  }
+
+  newHobby(hobby)
+  {
+    this.hobbies.push(hobby.value);
+    hobby = '';
+    return false;
+  }
+}
