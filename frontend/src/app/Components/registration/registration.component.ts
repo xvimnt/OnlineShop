@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from "../../Services/user.service";
+import { UserInterface } from "../../Models/user_interface";
 
 @Component({
   selector: 'app-registration',
@@ -12,13 +14,18 @@ export class RegistrationComponent implements OnInit {
   email: string;
   birthdate: string;
 
-  constructor() { }
+  constructor(public crudService: UserService) { }
 
   ngOnInit(): void {
   }
 
   regUser()
   {
-    console.log(this.firstname);
+    this.crudService.InsertUser(this.firstname, this.lastname, this.password)
+    .subscribe((res: UserInterface[]) => {
+      this.firstname = "";
+      this.lastname = "";
+      this.password = "";
+    });
   }
 }
