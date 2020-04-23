@@ -20,6 +20,10 @@
               <div class="form-label-group">
                 <input [(ngModel)]="this.email" [ngModelOptions]="{standalone: true}" type="email" id="inputEmail" class="form-control"  required>
               </div>
+              <label for="inputNumber">Numero de telefono</label>
+              <div class="form-label-group">
+                <input [(ngModel)]="this.tel" [ngModelOptions]="{standalone: true}" type="number" id="inputNumber" class="form-control"  required>
+              </div>
               <label for="inputBirthdate">Fecha de Nacimiento</label>
               <div class="form-label-group">
                 <input [(ngModel)]="this.birthdate" [ngModelOptions]="{standalone: true}" type="date" id="inputBirthdate" class="form-control"  required autofocus>

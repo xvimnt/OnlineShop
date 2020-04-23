@@ -22,22 +22,36 @@ export class UserService {
   }
 
   //TODO: INSERT USERS
-  InsertUser(firstname: string, lastname: string, password: string,) {
+  InsertUser(firstname: string, lastname: string, password: string,email: string, birthdate:string) {
     const url = "http://localhost:3000/addUser"
     return this.http.post(
       url,
       {
         "firstname": firstname,
         "lastname": lastname,
-        "password": password
+        "password": password,
+        "email": email
       },
       { headers: this.headers }
     ).pipe(map(data => data));
 
   }
 
-  //TODO:UPDATE USER
+  //TODO:GET USER
+  getUser(email: string, password: string)
+  {
+    const url = "http://localhost:3000/getUser"
+    return this.http.post(
+      url,
+      {
+        "password": password,
+        "email": email
+      },
+      { headers: this.headers }
+    ).pipe(map(data => data));
+  }
 
+  //TODO:UPDATE USER
   UpdateUser(codu: string, username: string, firstname: string, lastname: string) {
     const url = "http://localhost:3000/updateUser";
 

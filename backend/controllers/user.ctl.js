@@ -9,6 +9,17 @@ controller.getUsers = async (req,res) => {
   res.json(result.rows);
 };
 
+controller.getUser = async (req,res) => {
+
+  const { password, email } = req.body;
+  sql = 'select * from "user" where user_email = :email and user_key = :password';
+
+  let result = await bd.Open(sql,[email,password],true);
+
+  
+  res.json(result.rows);
+}
+
 controller.addUser = async (req,res) => 
 {
   const { firstname, lastname, password, email, tel, genre, birthdate } = req.body;
@@ -20,7 +31,8 @@ controller.addUser = async (req,res) =>
     await bd.Open(sql, [firstname, lastname, password, email, tel, genre, birthdate], true);
 
     res.status(200).json({
-        "msg": "Usuario agregado con exito"
+        "msg": "Usuario agregado con exito",
+        "status": 1
     });
 }
 

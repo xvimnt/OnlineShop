@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from "../../Services/user.service";
-import { UserInterface } from "../../Models/user_interface";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -12,20 +12,30 @@ export class RegistrationComponent implements OnInit {
   lastname: string;
   password: string;
   email: string;
+  tel: string;
   birthdate: string;
 
-  constructor(public crudService: UserService) { }
+  constructor(public crudService: UserService,private router:Router) { }
 
   ngOnInit(): void {
   }
 
   regUser()
   {
-    this.crudService.InsertUser(this.firstname, this.lastname, this.password)
-    .subscribe((res: UserInterface[]) => {
-      this.firstname = "";
-      this.lastname = "";
-      this.password = "";
+    var res = this.crudService.InsertUser(this.firstname, this.lastname, this.password,this.email,this.birthdate)
+    .subscribe((res: []) => {
+      
+      if(res["status"]){
+        console.log(res["msg"]);
+        this.router.navigate(['admin']);
+      }
+      else{
+        console.log(res["msg"]);
+        this.firstname = "";
+        this.lastname = "";
+        this.password = "";
+      }
     });
-  }
+  } 
+
 }
