@@ -7,7 +7,7 @@ import { MainPageComponent } from './Components/main-page/main-page.component';
 import { RegistrationComponent } from './Components/registration/registration.component';
 import { ShopComponent } from './Components/shop/shop.component';
 import { AdminComponent } from './Components/admin/admin.component';
-
+import { ConfirmEmailComponent } from './Components/confirm-email/confirm-email.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/alie-sell',pathMatch:'full'},
@@ -16,6 +16,7 @@ const routes: Routes = [
   {path:'registration',component:RegistrationComponent},
   {path:'shop',component:ShopComponent},
   {path:'admin',component:AdminComponent},
+  {path:'confirm',component:ConfirmEmailComponent},
   {path:'**',component:PageNotFoundComponent}
 ];
 

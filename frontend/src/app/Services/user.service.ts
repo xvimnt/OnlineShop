@@ -90,7 +90,7 @@ export class UserService {
   }
 
   //TODO: SET CURRENT USER
-  setCurrentUser(user: UserInterface) {
+  setCurrentUser(user: []) {
     let user_string = JSON.stringify(user);
     localStorage.setItem('UsuarioLogueado', user_string);
   }

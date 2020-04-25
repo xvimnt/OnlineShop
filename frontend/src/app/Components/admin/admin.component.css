@@ -10,6 +10,17 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+ .btn_a {
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #ed3330;
+  padding: 20px;
+  border-radius: 5px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
+  }
 :root {
   --blue: #007bff;
   --indigo: #6610f2;

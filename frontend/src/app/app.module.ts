@@ -20,6 +20,8 @@ import { RegistrationComponent } from './Components/registration/registration.co
 import { ShopComponent } from './Components/shop/shop.component';
 import { AdminComponent } from './Components/admin/admin.component';
 import { ShippingCartComponent } from './Components/shipping-cart/shipping-cart.component';
+import { TopBarShopComponent } from './top-bar-shop/top-bar-shop.component';
+import { ConfirmEmailComponent } from './Components/confirm-email/confirm-email.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { ShippingCartComponent } from './Components/shipping-cart/shipping-cart.
     RegistrationComponent,
     ShopComponent,
     AdminComponent,
-    ShippingCartComponent
+    ShippingCartComponent,
+    TopBarShopComponent,
+    ConfirmEmailComponent
   ],
   imports: [
     BrowserModule,
