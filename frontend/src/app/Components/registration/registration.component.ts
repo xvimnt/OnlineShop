@@ -23,25 +23,25 @@ export class RegistrationComponent implements OnInit {
 
   regUser()
   {
-    var res = this.crudService.InsertUser(this.firstname, this.lastname, this.password,this.email,this.birthdate)
+    this.crudService.InsertUser(this.firstname, this.lastname, this.password,this.tel,'M',this.email,this.birthdate,"U")
     .subscribe((res: []) => {
-      
       if(res["status"]){
+        this.crudService.sendEmailConf(this.firstname,this.lastname,this.email);
         this.router.navigate(['confirm']);
       }
-      else{
-        Swal.fire({
-          title: 'Error al registrar usuario',
-          text: res["msg"],
-          icon: 'error',
-          confirmButtonText: 'Intentar de nuevo'
-        });
-        
-        this.firstname = "";
-        this.lastname = "";
-        this.password = "";
-      }
     });
+    Swal.fire({
+      title: 'Error al registrar usuario',
+      text: "Credenciales invalidas",
+      icon: 'error',
+      confirmButtonText: 'Intentar de nuevo'
+    });
+    
+    this.firstname = "";
+    this.lastname = "";
+    this.password = "";
+    this.email = "";
+    this.birthdate = "";
   } 
 
 }

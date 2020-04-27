@@ -81,25 +81,34 @@ function sendConfirmationEmail(email,name,token)
 controller.addUser = async (req,res) => 
 {
   // Obtener los datos del registro
-  const { firstname, lastname, password, email, tel, genre, birthdate } = req.body;
+  const { firstname, lastname, password, email, tel, genre, birthdate, type } = req.body;
 
+  // Ingresar al usuario en la base de datos   
+  sql = 'insert into "user"( USER_NAME, USER_LASTNAME, USER_KEY,'+
+    'USER_EMAIL, USER_TEL, USER_GENRE, USER_CLASS'+
+    ') values (:firstname, :lastname, :password, :email, :tel, :genre, :type)';
+  
+    await bd.Open(sql, [firstname, lastname, password, email, tel, genre, type], true);
+
+    res.status(200).json({
+        "msg": "Usuario agregado con exito",
+        "status": 1
+    });
+}
+
+controller.sendConfirm = async (req,res) => {
+  // Obtener los datos del registro
+  const { firstname, lastname, email } = req.body;
   // Crear la temp Key 
   jwt.sign({email}, 'secretkey', (err, token) => {
     // Enviar la temp key
     sendConfirmationEmail(email,firstname + ' ' + lastname, token);
   });
   
-  // Ingresar al usuario en la base de datos   
-  sql = 'insert into "user"( USER_NAME, USER_LASTNAME, USER_KEY,'+
-    'USER_EMAIL, USER_TEL, USER_GENRE, USER_BIRTH_DATE'+
-    ') values (:firstname, :lastname, :password, :email, :tel, :genre, :birthdate)';
-  
-    await bd.Open(sql, [firstname, lastname, password, email, tel, genre, birthdate], true);
-
-    res.status(200).json({
-        "msg": "Usuario agregado con exito",
-        "status": 1
-    });
+  res.status(200).json({
+    "msg": "email enviado con exito",
+    "status": 1
+  });
 }
 
 module.exports = controller;

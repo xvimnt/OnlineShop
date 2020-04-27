@@ -20,6 +20,11 @@ export class LoginComponent implements OnInit {
     
   }
 
+  gotoreg()
+  {
+    this.router.navigate(['registration']);
+  }
+
   login()
   {
     var res = this.crudService.getUser(this.email,this.password)

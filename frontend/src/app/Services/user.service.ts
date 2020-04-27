@@ -21,20 +21,36 @@ export class UserService {
     return this.http.get(url);
   }
 
+  //TODO: CONFIRM USER
+  sendEmailConf(firstname: string, lastname: string, email: string ) {
+    const url = "http://localhost:3000/sendConfirm"
+    return this.http.post(
+      url,
+      {
+        firstname,
+        lastname,
+        email
+      },
+      { headers: this.headers }
+    ).pipe(map(data => data));
+  }
   //TODO: INSERT USERS
-  InsertUser(firstname: string, lastname: string, password: string,email: string, birthdate:string) {
+  InsertUser(firstname: string, lastname: string, password: string, tel: string, genre: string,email: string, birthdate:string, type:string) {
     const url = "http://localhost:3000/addUser"
     return this.http.post(
       url,
       {
-        "firstname": firstname,
-        "lastname": lastname,
-        "password": password,
-        "email": email
+        firstname,
+        lastname,
+        password,
+        tel,
+        genre,
+        email,
+        birthdate,
+        type
       },
       { headers: this.headers }
     ).pipe(map(data => data));
-
   }
 
   //TODO:GET USER
