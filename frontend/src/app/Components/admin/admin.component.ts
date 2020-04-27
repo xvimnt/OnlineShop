@@ -70,9 +70,14 @@ export class AdminComponent implements OnInit {
             item['id'] = result.data[i][0];
             item['url'] = result.data[i][1];
             item['desc'] = result.data[i][2];
-            item['cat'] = result.data[i][3];
+            // Insert the categories
+            var cats = (result.data[i][3]).split('-');
+            console.log(cats);
+            // Insert the det_prod_cat
+
             item['price'] = result.data[i][4];
-            item['cant'] = result.data[i][5];
+            item['cant'] = result.data[i][5]
+            item['cat'] = cats[0];
             item['colors'] = result.data[i][6];   
             item['date'] = this.timestamp();
             res.push(item);

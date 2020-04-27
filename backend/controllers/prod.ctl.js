@@ -6,7 +6,6 @@ controller.addProduct = async (req,res) =>
 {
   // Obtener los datos del registro
   const { id, url, desc,price , cant, colors } = req.body;
-  var i_date = 
   // Ingresar al usuario en la base de datos   
   sql = 'insert into PRODUCT(  prod_id, prod_img_url, prod_desc, prod_price' +     
     'prod_initial_date, category_cant, prod_colors' + 
