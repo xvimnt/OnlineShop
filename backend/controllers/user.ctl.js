@@ -81,14 +81,14 @@ function sendConfirmationEmail(email,name,token)
 controller.addUser = async (req,res) => 
 {
   // Obtener los datos del registro
-  const { firstname, lastname, password, email, tel, genre, birthdate, type } = req.body;
+  const { firstname, lastname, password, email, tel, genre, birthdate, type, disp} = req.body;
 
   // Ingresar al usuario en la base de datos   
   sql = 'insert into "user"( USER_NAME, USER_LASTNAME, USER_KEY,'+
-    'USER_EMAIL, USER_TEL, USER_GENRE, USER_CLASS'+
-    ') values (:firstname, :lastname, :password, :email, :tel, :genre, :type)';
-  
-    await bd.Open(sql, [firstname, lastname, password, email, tel, genre, type], true);
+    'USER_EMAIL, USER_TEL, USER_GENRE, USER_BIRTH_DATE, USER_CLASS, USER_DISP'+
+    ') values (:firstname, :lastname, :password, :email, :tel, :genre, TO_DATE(:birthdate, \'DD/MM/YY\'), :type, :disp)';
+   console.log("usuario: ", [firstname, lastname, password, email, tel, genre, birthdate, type, disp]);
+    await bd.Open(sql, [firstname, lastname, password, email, tel, genre, birthdate, type, disp], true);
 
     res.status(200).json({
         "msg": "Usuario agregado con exito",

@@ -8,6 +8,9 @@ import { RegistrationComponent } from './Components/registration/registration.co
 import { ShopComponent } from './Components/shop/shop.component';
 import { AdminComponent } from './Components/admin/admin.component';
 import { ConfirmEmailComponent } from './Components/confirm-email/confirm-email.component';
+import { ForbiddenComponent } from './Components/forbidden/forbidden.component';
+import { ItemComponent } from './Components/item/item.component';
+import { UsercrudComponent } from './Components/usercrud/usercrud.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/alie-sell',pathMatch:'full'},
@@ -17,6 +20,9 @@ const routes: Routes = [
   {path:'shop',component:ShopComponent},
   {path:'admin',component:AdminComponent},
   {path:'confirm',component:ConfirmEmailComponent},
+  {path:'forbidden',component:ForbiddenComponent},
+  {path:'item',component:ItemComponent},
+  {path:'ucrud',component:UsercrudComponent},
   {path:'**',component:PageNotFoundComponent}
 ];
 

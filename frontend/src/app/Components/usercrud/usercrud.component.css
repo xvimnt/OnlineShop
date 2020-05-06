@@ -1,0 +1,358 @@
+body{
+    font-size: 14px;
+ }
+ 
+ #fab {
+   position: fixed;
+   bottom: 50px;
+   right: 20px;
+   z-index: 100;
+ }
+ 
+ .open-fab-primary {
+     height: 50px;
+     width: 50px;
+     display: block;
+     background: #2D383F;
+     padding: 14px 14px;
+     text-align: center;
+     color: #fff;
+     border-radius: 50%;
+         font-size: 16px;
+ }
+ 
+ .open-fab-primary:hover {
+     background: #117C65;
+     color: #fff;
+ }
+ 
+ .card-title {
+     margin-bottom: 0;
+ }
+ 
+ .card-menu{
+    position: absolute;
+    right: 10px;
+    display: inline-block !important;
+ }
+ 
+ 
+ textarea.form-control {
+    display: block;
+    width: 100%;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #6e707e;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #d1d3e2;
+    border-radius: .35rem;
+ }
+ 
+ .form-control[readonly]{
+    background-color: #fff;
+    color: #6e707e;
+    cursor: default;
+ }
+ 
+ label{
+     margin-top: 6px;
+     margin-bottom: -5px;
+ }
+ 
+ .form-group{
+     margin-bottom: 0px;
+ }
+ 
+ /* CHECKBOX STYLE */
+ input[type=checkbox]{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+ }
+ 
+ /* RADIO BUTTON STYLE */
+ input[type=radio]{
+    /* Hide original inputs */
+    visibility: hidden;
+    position: absolute;
+ }
+ 
+ input[type=radio] + label:before{
+    height:20px;
+    width:20px;
+    margin-right: 5px;
+    content: " ";
+    display:inline-block;
+    vertical-align: baseline;
+    border:1px solid #777;
+    border-radius: 50%;
+    cursor: pointer;
+ }
+ 
+ input[type=radio]:checked + label:before{
+   background: #686868;
+ }
+ 
+ 
+ .radio-danger {
+    background: rgb(246, 206, 206) none repeat scroll 0% 0%;
+    border-radius: 20%;
+    padding: 2px 5px;
+ }
+ 
+ /*/////// FORM INPUTS STYLES //////////*/
+ 
+ .form-warning {
+    display: block;
+    width: 100%;
+    height: 35px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    border-radius: .35rem;
+    color: #DD7308;
+    background-color: #FCF3EA;
+    background-image: none;
+    border: 1px solid #DD7308;
+    
+ }
+ 
+ .form-info {
+    display: block;
+    width: 100%;
+    height: 35px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    border-radius: .35rem;
+    color: #37859B;
+    background-color: #C7E2EA;
+    background-image: none;
+    border: 1px solid #51bcda;
+ }
+ 
+ .form-danger {
+    display: block;
+    width: 100%;
+    height: 35px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    border-radius: .35rem;
+    color: #843A39;
+    background-color: #f2dede;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid #a94442;
+ }
+ 
+ .select2-container .select2-selection--single {
+   height: 35px;
+ }
+ 
+ .select2-container .select2-selection--single .select2-selection__rendered {
+   padding-top: 3px;
+ }
+ 
+ .select2-container--default .select2-selection--single .select2-selection__arrow {
+     top: 5px;
+ }
+ 
+ .select-danger {
+    color: #a94442;
+    font-weight: 900;
+    display: block;
+    padding-left: 8px;
+    padding-right: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+ }
+ 
+ .select-control{
+    color: #444;
+    font-weight: 500;
+    display: block;
+    padding-left: 8px;
+    padding-right: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+ }
+ 
+ 
+ 
+ 
+ [class^="icon-"], [class*=" icon-"] {
+   /* use !important to prevent issues with browser extensions that change fonts */
+   font-family: 'icomoon' !important;
+   speak: none;
+   font-style: normal;
+   font-weight: normal;
+   font-variant: normal;
+   text-transform: none;
+   line-height: 1;
+ 
+   /* Better Font Rendering =========== */
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+ }
+ 
+ .icon-2x{
+     font-size: 2em;
+ }
+ 
+ .icon-3x{
+     font-size: 3em;
+ }
+ 
+ .icon-4x{
+     font-size: 4em;
+ }
+ 
+ .icon-5x{
+     font-size: 5em;
+ }
+ 
+ .icon-farasi:before {
+   content: "\e901";
+ }
+ 
+ 
+ /************ preview de imagen **************/
+ .img-preview-sm {
+     height: 300px;
+     width: 330px;
+     border-style: solid;
+     border-width: 1px;
+ }
+ 
+ .img-preview-lg {
+     width: 454px;
+     height: 280px;
+     border-style: solid;
+     border-width: 1px;
+ }
+ 
+ .img-container, .img-preview {
+     overflow: hidden;
+     text-align: center;
+     background-repeat:no-repeat;
+     background-size:contain;
+     z-index: 1000;
+     position: relative;
+     bottom: 1px;
+ }
+ 
+ @media (max-width: 576px) {
+     .img-preview-sm {
+         height: 150px;
+         width: 150px;
+     }
+ }
+ 
+ 
+ 
+ /*/////////  Elemntos Propios  ////////////*/
+ .hidden{
+     display: none;
+ }
+ 
+ .sin-paddin{
+     padding-left: 0px;
+     padding-right: 0px;
+ }
+ 
+ .sin-margin{
+     margin: 0px;
+ }
+ 
+ .sin-top{
+     padding-top: 0px;
+     margin-top: 0px;
+ }
+ 
+ 
+ /*///////// Progress Bar  ////////////*/
+ .progress-bar-danger {
+     background-color: #A80000;
+ }
+ 
+ .progress-bar-warning {
+     background-color: #fbc658;
+ }
+ 
+ .progress-bar-success {
+     background-color: #1D9619;
+ }
+ 
+ 
+ /*///////// Tipografia y Fuentes  ////////////*/
+ 
+ .font-10{
+     font-size: 10px;
+ }
+ 
+ .font-12{
+     font-size: 12px;
+ }
+ 
+ .font-14{
+     font-size: 14px;
+ }
+ 
+ .font-16{
+     font-size: 16px;
+ }
+ 
+ .font-18{
+     font-size: 18px;
+ }
+ 
+ /*///////// Alertas y Notificaciones  ////////////*/
+ .alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+ }
+ 
+ 
+ .modal-dialog {
+    max-width: 100%;
+    margin: .25rem auto;
+    padding-top: 10px;
+ }
+ 
+ .modal-sm {
+    width: 400px;
+ }
+ 
+ .modal-lg {
+    width: 95%;
+ }
+ 
+ 
+ /*///////// Alertas y Notificaciones  ////////////*/
+ .scroll-container {
+     width: 100%;
+     overflow-x: auto;
+     white-space: nowrap;
+     border-right: 5px solid #BABABA;
+ }
+
+ #IFbody{
+	position: relative;
+	width: 100%;
+	height: 75vh;
+	border: 0;
+}
+
+.frame-body{
+	background-color: #f8f9fc;
+}

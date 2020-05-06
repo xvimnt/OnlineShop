@@ -35,7 +35,7 @@ export class UserService {
     ).pipe(map(data => data));
   }
   //TODO: INSERT USERS
-  InsertUser(firstname: string, lastname: string, password: string, tel: string, genre: string,email: string, birthdate:string, type:string) {
+  InsertUser(firstname: string, lastname: string, password: string, tel: string, genre: string,email: string, birthdate:string, type:string, disp:string) {
     const url = "http://localhost:3000/addUser"
     return this.http.post(
       url,
@@ -47,7 +47,8 @@ export class UserService {
         genre,
         email,
         birthdate,
-        type
+        type,
+        disp
       },
       { headers: this.headers }
     ).pipe(map(data => data));
@@ -110,6 +111,7 @@ export class UserService {
     let user_string = JSON.stringify(user);
     localStorage.setItem('UsuarioLogueado', user_string);
   }
+  
   //TODO: GET CURRENT USER
   getCurrentUser() {
     let userCurrent = localStorage.getItem('UsuarioLogueado');

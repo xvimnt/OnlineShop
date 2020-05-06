@@ -21,27 +21,36 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  fixBirthdate() {
+    let birthArray = this.birthdate.split('-');
+    this.birthdate = "";
+    if(birthArray.length > 0) {
+     for(var i = birthArray.length - 1; i >= 0; i--) {
+       this.birthdate += birthArray[i];
+       if(i >= 1) this.birthdate += '-';
+      } 
+    }
+  }
+
   regUser()
   {
-    this.crudService.InsertUser(this.firstname, this.lastname, this.password,this.tel,'M',this.email,this.birthdate,"U")
+    this.fixBirthdate();
+    this.crudService.InsertUser(this.firstname, this.lastname, this.password,this.tel,'M',this.email,this.birthdate,"U","2")
     .subscribe((res: []) => {
-      if(res["status"]){
+      console.log(res);
+      if(res['status']){
         this.crudService.sendEmailConf(this.firstname,this.lastname,this.email);
         this.router.navigate(['confirm']);
       }
+      else {
+        Swal.fire({
+          title: 'Error al registrar usuario',
+          text: "Credenciales invalidas",
+          icon: 'error',
+          confirmButtonText: 'Intentar de nuevo'
+        });
+      }
     });
-    Swal.fire({
-      title: 'Error al registrar usuario',
-      text: "Credenciales invalidas",
-      icon: 'error',
-      confirmButtonText: 'Intentar de nuevo'
-    });
-    
-    this.firstname = "";
-    this.lastname = "";
-    this.password = "";
-    this.email = "";
-    this.birthdate = "";
   } 
 
 }

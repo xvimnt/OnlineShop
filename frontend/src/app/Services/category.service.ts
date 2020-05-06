@@ -14,13 +14,41 @@ export class CategoryService {
     "Content-Type": "application/json"
   })
 
-  InsertUser(name: string, desc: string) {
+  InsertCategory(name: string, desc: string) {
     const url = "http://localhost:3000/addCategory"
     return this.http.post(
       url,
       {
         name,
         desc
+      },
+      { headers: this.headers }
+    ).pipe(map(data => data));
+  }
+
+  getCategories() {
+    const url = "http://localhost:3000/getCategories";
+    return this.http.get(url);
+  }
+
+  insertHierarchy(father: string, son: string) {
+    const url = "http://localhost:3000/addHierarchy"
+    return this.http.post(
+      url,
+      {
+        father,
+        son
+      },
+      { headers: this.headers }
+    ).pipe(map(data => data));
+  }
+
+  getCategory(name:string) {
+    const url = "http://localhost:3000/getCategory"
+    return this.http.post(
+      url,
+      {
+        name
       },
       { headers: this.headers }
     ).pipe(map(data => data));

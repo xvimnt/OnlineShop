@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2'
+import {Router} from '@angular/router';
 import { Papa } from 'ngx-papaparse';
+import { ProductService } from "../../Services/product.service";
+import { UserService } from "../../Services/user.service";
+import { CategoryService } from "../../Services/category.service";
 
 @Component({
   selector: 'app-admin',
@@ -10,9 +14,20 @@ import { Papa } from 'ngx-papaparse';
 export class AdminComponent implements OnInit {
   selectedFile: File;
 
-  constructor(private papa: Papa) { }
+  constructor(private router:Router, public catService:CategoryService, public userService:UserService, public prodService: ProductService, private papa: Papa) { }
 
   ngOnInit(): void {
+    let cuser = this.userService.getCurrentUser();
+    //console.log(cuser);
+    /*if(cuser == null) {
+      this.router.navigate(['/']);
+    }
+    else {
+      if(cuser[0][12] != 'A') {
+        this.router.navigate(['forbidden']);
+      }
+      console.log("usuario logueado clase: ", cuser[0][12]);
+    }*/
   }
 
   timestamp() {
@@ -37,9 +52,20 @@ export class AdminComponent implements OnInit {
     // current seconds
     let seconds = date_ob.getSeconds();
 
-    // prints date & time in YYYY-MM-DD HH:MM:SS format
-    return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+    // DD-MM-YYYY Format
+    return date + "-" + month + "-" + year;
 
+  }
+
+  addHierarchy(catArray: string[]) {
+    if(catArray.length > 1) {
+      for(var i = 1; i < catArray.length; i++) {
+        this.catService.insertHierarchy(catArray[0].trim(), catArray[i].trim())
+        .subscribe((res: []) => {
+          console.log(res);
+        });
+      }
+    }
   }
 
   onFileSelected(event)
@@ -64,25 +90,30 @@ export class AdminComponent implements OnInit {
 
       this.papa.parse(this.selectedFile,{
         complete: (result) => {
-          var res = [];
+          // Agregar producto por producto
           for(var i = 1; i<result.data.length; i++) {
-            var item = {};
-            item['id'] = result.data[i][0];
-            item['url'] = result.data[i][1];
-            item['desc'] = result.data[i][2];
             // Insert the categories
-            var cats = (result.data[i][3]).split('-');
-            console.log(cats);
-            // Insert the det_prod_cat
-
-            item['price'] = result.data[i][4];
-            item['cant'] = result.data[i][5]
-            item['cat'] = cats[0];
-            item['colors'] = result.data[i][6];   
-            item['date'] = this.timestamp();
-            res.push(item);
+            var catArray = result.data[i][3].split('-');
+            // Verify the existence of each category
+            for(var j = 0; j < catArray.length; j++) {
+              // Agregar todas las categorias
+              this.catService.InsertCategory(catArray[j].trim(), '').subscribe((res:[]) => {
+                console.log(res);
+              });
+              // Agregar la relacion con los productos
+              this.prodService.addRelation(result.data[i][0],catArray[j].trim()).subscribe((res:[]) => {
+                console.log(res);
+              });
+            }
+            // Agregar la jeraquia entre ellas
+            this.addHierarchy(catArray);
+            // Agregar producto a la base de datos
+            this.prodService.InsertProduct(result.data[i][2], result.data[i][0],result.data[i][1],
+              result.data[i][4], result.data[i][5], result.data[i][6], this.timestamp())
+              .subscribe((res: []) => {
+                console.log(res);
+              });
           }
-          console.log(res);
         }
       });
     }

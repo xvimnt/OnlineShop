@@ -20,9 +20,14 @@ import { RegistrationComponent } from './Components/registration/registration.co
 import { ShopComponent } from './Components/shop/shop.component';
 import { AdminComponent } from './Components/admin/admin.component';
 import { ShippingCartComponent } from './Components/shipping-cart/shipping-cart.component';
-import { TopBarShopComponent } from './top-bar-shop/top-bar-shop.component';
+import { TopBarShopComponent } from './Components/top-bar-shop/top-bar-shop.component';
 import { ConfirmEmailComponent } from './Components/confirm-email/confirm-email.component';
 import { AdminCardsComponent } from './Components/admin-cards/admin-cards.component';
+import { ForbiddenComponent } from './Components/forbidden/forbidden.component';
+import { ItemComponent } from './Components/item/item.component';
+import { UsercrudComponent } from './Components/usercrud/usercrud.component';
+import { AdminNavBarComponent } from './Components/admin-nav-bar/admin-nav-bar.component';
+import { AdminSideNavComponent } from './Components/admin-side-nav/admin-side-nav.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +48,12 @@ import { AdminCardsComponent } from './Components/admin-cards/admin-cards.compon
     ShippingCartComponent,
     TopBarShopComponent,
     ConfirmEmailComponent,
-    AdminCardsComponent
+    AdminCardsComponent,
+    ForbiddenComponent,
+    ItemComponent,
+    UsercrudComponent,
+    AdminNavBarComponent,
+    AdminSideNavComponent
   ],
   imports: [
     BrowserModule,

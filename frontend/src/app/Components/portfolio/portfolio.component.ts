@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from "../../Services/product.service";
 
 @Component({
   selector: 'app-portfolio',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./portfolio.component.css']
 })
 export class PortfolioComponent implements OnInit {
+products: [];
 
-  constructor() { }
+  constructor(public prodService: ProductService) { }
 
   ngOnInit(): void {
+    this.prodService.GetProducts().subscribe((res:[]) => {
+      this.products = res;
+    });
   }
 
 }
