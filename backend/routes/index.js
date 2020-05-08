@@ -8,6 +8,8 @@ router.get('/getUsers', user_routes.getUsers);
 router.post('/addUser',user_routes.addUser);
 router.post('/getUser',user_routes.getUser);
 router.post('/sendConfirm',user_routes.sendConfirm);
+router.put('/updateUser',user_routes.updateUser);
+router.delete('/deleteUser/:email', user_routes.deleteUser);
 
 // Endpoints de productos
 const prod_routes = require("../controllers/prod.ctl.js");

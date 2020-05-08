@@ -19,7 +19,27 @@
     </li>
   </ul>
 </div>
-
+let state;
+    switch(element[13]) {
+      case "1":
+        state = "Activo"
+        break;
+      case "2":
+        state = "En Confirmacion"
+        break;
+    }
+    let type;
+    switch(element[12]) {
+      case "U":
+        type = "Usuario"
+        break;
+      case "A":
+        type = "Administrador"
+        break;
+      case "H":
+        type = "Servicio de ayuda"
+        break;
+    }
 //----------------app component
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';

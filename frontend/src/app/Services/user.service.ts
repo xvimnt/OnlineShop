@@ -69,27 +69,29 @@ export class UserService {
   }
 
   //TODO:UPDATE USER
-  UpdateUser(codu: string, username: string, firstname: string, lastname: string) {
+  UpdateUser(firstname: string, lastname: string, password: string, tel: string, genre: string,email: string, birthdate:string, type:string, selected: string) {
     const url = "http://localhost:3000/updateUser";
 
     return this.http.put(
       url,
       {
-        "codu": codu,
-        "username": username,
-        "firstname": firstname,
-        "lastname": lastname
+        firstname,
+        lastname,
+        password,
+        tel,
+        genre,
+        email,
+        birthdate,
+        type, 
+        selected
       },
       { headers: this.headers }
     ).pipe(map(data => data));
   }
 
-
-
   //TODO: DELETE USER
-
-  DeleteUser(codu) {
-    const url = "http://localhost:3000/deleteUser/" + codu;
+  DeleteUser(email) {
+    const url = "http://localhost:3000/deleteUser/" + email;
     return this.http.delete(url).pipe(map(data => data));
   }
 

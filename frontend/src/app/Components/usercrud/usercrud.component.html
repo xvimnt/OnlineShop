@@ -36,73 +36,92 @@
 								<div class="col-md-6 text-right"><label class = " text-danger">* Campos Obligatorios</label> </div>
 							</div>
 							<br>
-							<div class="row">
+							<div class="row" >
 								<div class="col-md-6">
-									<label>Nombre de la Categor&iacute;a:</label> <span class="text-danger">*</span>
-									<input type = "text" class="form-control" name = "nombre" id = "nombre" onkeyup = "texto(this)" />
+									<label>Primer Nombre:</label> <span class="text-danger">*</span>
+									<input [(ngModel)]="this.firstname" [ngModelOptions]="{standalone: true}" type = "text" class="form-control" />
 									<input type = "hidden" name = "codigo" id = "codigo" />
+									<label>Segundo Nombre:</label> <span class="text-danger">*</span>
+									<input [(ngModel)]="this.lastname" [ngModelOptions]="{standalone: true}" type = "text" class="form-control" />
+									<label>Email:</label> <span class="text-danger">*</span>
+									<input [(ngModel)]="this.email" [ngModelOptions]="{standalone: true}" type = "text" class="form-control" />	
+									<div *ngIf = "!selected">
+										<label>Password:</label> <span class="text-danger">*</span>
+										<input [(ngModel)]="this.password" [ngModelOptions]="{standalone: true}" type = "password" class="form-control" />	
+										<label>Confirmar Passowrd:</label> <span class="text-danger">*</span>
+										<input type = "password" class="form-control" />	
+									</div>
 								</div>
 								<div class="col-md-5">
-									<label>Color:</label> <span class="text-danger">*</span>
-									<input type="text" class="form-control" id="color" name="color" value="#fff" />
-								</div>
-								<div class="col-md-1">
-									<label>#</label><br>
-									<button type="button" id="btn-color" class="btn btn-white btn-block back-change" style="background-color: #fff; border: 1px solid #E5E5E5;"> &nbsp;</button>
+									<label>Numero de telefono:</label> <span class="text-danger">*</span>
+									<input [(ngModel)]="this.tel" [ngModelOptions]="{standalone: true}" type = "number" class="form-control" name = "nombre" id = "nombre"  />
+									<label>Fecha de nacimiento:</label> <span class="text-danger">*</span>
+									<input [(ngModel)]="this.birthdate" [ngModelOptions]="{standalone: true}" type = "date" class="form-control" name = "nombre" id = "nombre"  />				
+									<label>Tipo de usuario:</label> <span class="text-danger">*</span>
+									<div>
+										<select id="type" [(ngModel)]="this.type">
+											<option value="U">Usuario</option>
+											<option value="A">Administrador</option>
+											<option value="H">Servicio de Ayuda</option>
+										</select>
+									</div>
+									<label>Genero:</label> <span class="text-danger">*</span>
+									<div>
+										<select id="type" [(ngModel)]="this.genre">
+											<option value="M">Masculino</option>
+											<option value="F">Femenino</option>
+											<option value="N">No aplica</option>
+										</select>
+									</div>
 								</div>
 							</div>
 							<br>
 							<div class="row">
 								<div class="col-md-12 text-center">
-									<button type="button" class="btn btn-secondary btn-sm" id = "btn-limpiar" onclick = "Limpiar();"><span class="fa fa-eraser"></span> Limpiar</button>
-									<button type="button" class="btn btn-primary btn-sm" id = "btn-grabar" onclick = "Grabar();"><span class="fa fa-save"></span> Grabar</button>
-									<button type="button" class="btn btn-primary btn-sm hidden" id = "btn-modificar" onclick = "Modificar();"><span class="fa fa-save"></span> Grabar</button>
+									<button type="button" class="btn btn-secondary btn-sm" id = "btn-limpiar" (click)="clean()"><span class="fa fa-eraser"></span> Limpiar</button>
+									<button *ngIf = "!selected" type="button" class="btn btn-primary btn-sm" id = "btn-grabar" (click)="regUser()"><span class="fa fa-save"></span> Grabar</button>
+									<button *ngIf = "selected" type="button" class="btn btn-primary btn-sm" id = "btn-modificar" (click)="edit()"><span class="fa fa-save"></span> Grabar</button>
 								</div>
 							</div>
 							<hr>
-							<div class="row">
-								<div class="col-lg-12" id = "result">
-									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-										<thead>
-											<tr>
-												<th>Name</th>
-												<th>Position</th>
-												<th>Office</th>
-												<th>Age</th>
-												<th>Start date</th>
-												<th>Salary</th>
-											</tr>
-										</thead>
-										<tfoot>
-											<tr>
-												<th>Name</th>
-												<th>Position</th>
-												<th>Office</th>
-												<th>Age</th>
-												<th>Start date</th>
-												<th>Salary</th>
-											</tr>
-										</tfoot>
-										<tbody>
-											<tr>
-												<td>Tiger Nixon</td>
-												<td>System Architect</td>
-												<td>Edinburgh</td>
-												<td>61</td>
-												<td>2011/04/25</td>
-												<td>$320,800</td>
-											</tr>
-											<tr>
-												<td>Garrett Winters</td>
-												<td>Accountant</td>
-												<td>Tokyo</td>
-												<td>63</td>
-												<td>2011/07/25</td>
-												<td>$170,750</td>
-											</tr>
-										</tbody>
-									</table>	
-								</div>
+							<div class="row" *ngIf = "!selected">
+								<table class="table table-striped" id="tabla" width="100%" cellspacing="0" >
+									<thead>
+										<tr>
+											<th class = "text-center" width = "50px"><i class="fas fa-cogs"></i></th>
+											<th class = "text-center" width = "20px">Email</th>
+											<th class = "text-left" width = "250px">Nombre</th>
+											<th class = "text-left" width = "250px">Contacto</th>
+											<th class = "text-left" width = "250px">Clase</th>
+											<th class = "text-left" width = "100px">Estado</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let user of users">
+											<td class = "text-center">
+												<div class="btn-group">
+													<button type="button" class="btn btn-secondary btn-sm" title = "Editar Categoria" (click)="select(user)" ><i class="fa fa-pencil-alt"></i></button>
+													<button type="button" class="btn btn-danger btn-sm" title = "Eliminar Categoria" (click)="remove(user)"><i class="fa fa-eraser"></i></button>
+												</div>
+											</td>
+											<td class = "text-left">
+												{{user.email}}
+											</td>
+											<td class = "text-left">
+												{{user.firstname + " " + user.lastname}}
+											</td>
+											<td class = "text-left">
+												{{user.tel}}
+											</td>
+											<td class = "text-left">
+												{{user.class}}
+											</td>
+											<td class = "text-left">
+												{{user.disp}}
+											</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 							<br>
 						</div>

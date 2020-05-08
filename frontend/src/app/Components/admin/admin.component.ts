@@ -19,7 +19,7 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     let cuser = this.userService.getCurrentUser();
     //console.log(cuser);
-    /*if(cuser == null) {
+    if(cuser == null) {
       this.router.navigate(['/']);
     }
     else {
@@ -27,7 +27,7 @@ export class AdminComponent implements OnInit {
         this.router.navigate(['forbidden']);
       }
       console.log("usuario logueado clase: ", cuser[0][12]);
-    }*/
+    }
   }
 
   timestamp() {

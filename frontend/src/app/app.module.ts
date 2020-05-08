@@ -28,6 +28,7 @@ import { ItemComponent } from './Components/item/item.component';
 import { UsercrudComponent } from './Components/usercrud/usercrud.component';
 import { AdminNavBarComponent } from './Components/admin-nav-bar/admin-nav-bar.component';
 import { AdminSideNavComponent } from './Components/admin-side-nav/admin-side-nav.component';
+import { UserNavBarComponent } from './Components/user-nav-bar/user-nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { AdminSideNavComponent } from './Components/admin-side-nav/admin-side-na
     ItemComponent,
     UsercrudComponent,
     AdminNavBarComponent,
-    AdminSideNavComponent
+    AdminSideNavComponent,
+    UserNavBarComponent
   ],
   imports: [
     BrowserModule,

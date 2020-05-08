@@ -30,10 +30,41 @@ function verifyToken(req, res, next) {
 }
 
 
+//DELETE
+controller.deleteUser = async (req, res) => {
+  
+  const { email } = req.params;
+  // Consulta 
+  sql = 'update "user" set user_disp = 0 where user_email = :email';
+  // Ejecutar consulta
+  await bd.Open(sql, [email], true);
+  // Mensaje para el usuario
+  res.json({ "msg": "Usuario Eliminado" })
+}
+
 controller.getUsers = async (req,res) => {
-  sql = 'select * from "user"';
+  sql = 'select * from "user" where user_disp != 0 ';
   let result = await bd.Open(sql,[],false);
-  res.json(result.rows);
+  let users = [];
+  result.rows.forEach(element => {
+    let item = {
+      "firstname": element[0],
+      "lastname": element[1],
+      "password": element[2],
+      "email": element[3],
+      "tel": element[4],
+      "genre": element[6],
+      "birthdate": element[7],
+      "regday": element[8],
+      "dir": element[9],
+      "credit": element[10],
+      "earns": element[11],
+      "class": element[12],
+      "disp": element[13]
+    }
+    users.push(item);
+  });
+  res.json(users);
 };
 
 controller.getUser = async (req,res) => {
@@ -42,8 +73,8 @@ controller.getUser = async (req,res) => {
   sql = 'select * from "user" where user_email = :email and user_key = :password';
 
   let result = await bd.Open(sql,[email,password],true);
-
   
+  // regresar usuario
   res.json(result.rows);
 }
 
@@ -92,6 +123,23 @@ controller.addUser = async (req,res) =>
 
     res.status(200).json({
         "msg": "Usuario agregado con exito",
+        "status": 1
+    });
+}
+
+controller.updateUser = async (req,res) => 
+{
+  // Obtener los datos del registro
+  const { firstname, lastname, email, tel, genre, type, selected} = req.body;
+  // Ingresar al usuario en la base de datos   
+  sql = 'update "user" set  USER_NAME = :firstname, USER_LASTNAME = :lastname, '+
+    'USER_EMAIL = :email, USER_TEL = :tel, USER_GENRE = :genre, USER_CLASS= :type ' +
+    'where USER_EMAIL = :selected';
+  // Ejecutar consulta
+    await bd.Open(sql, [firstname, lastname, email, tel, genre, type, selected], true);
+  // Consulta exitosa
+    res.status(200).json({
+        "msg": "Usuario actualizado con exito",
         "status": 1
     });
 }
