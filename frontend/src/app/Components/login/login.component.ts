@@ -25,13 +25,30 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['registration']);
   }
 
+  isEmpty(obj) {
+    for(var prop in obj) {
+        if(obj.hasOwnProperty(prop))
+            return false;
+    }
+    return true;
+  }
+
   login()
   {
     var res = this.crudService.getUser(this.email,this.password)
     .subscribe((res: []) => {
-      if(res.length){
+      //console.log(res);
+      if(!this.isEmpty(res)){
         this.crudService.setCurrentUser(res);
-        this.router.navigate(['shop']);
+        
+        switch(res['class']) {
+          case 'U':
+            this.router.navigate(['shop']);
+            break;
+          case 'A':
+            this.router.navigate(['admin']);
+            break;
+        }
       }
       else{
         Swal.fire({

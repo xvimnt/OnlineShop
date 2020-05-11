@@ -5,6 +5,8 @@ const controller = {};
 controller.addCategoryTo = async (req, res) => {
   const { product, category } = req.body;
   sql = 'insert into det_prod_cat( product_prod_id, category_cat_name ) values (:product, :category)';
+  console.log(sql);
+  console.log([product, category]);
   await bd.Open(sql, [product, category], true);
   res.status(200).json({
     "msg": "Relacion agregada con exito",

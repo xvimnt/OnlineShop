@@ -23,6 +23,7 @@
     "bootstrap": "^4.4.1",
     "jquery": "^3.5.0",
     "jspdf": "^1.5.3",
+    "jspdf-autotable": "^3.5.3",
     "ngx-papaparse": "^4.0.4",
     "rxjs": "~6.5.4",
     "sweetalert2": "^9.10.12",

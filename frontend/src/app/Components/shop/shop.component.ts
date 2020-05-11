@@ -14,21 +14,28 @@ export class ShopComponent implements OnInit {
 
   constructor( private router:Router, public categoryService: CategoryService, public userService:UserService) { }
 
-  ngOnInit(): void {
+  accessPage() {
     let cuser = this.userService.getCurrentUser();
-    //console.log(cuser);          
+    //console.log(cuser);
     if(cuser == null) {
       this.router.navigate(['/']);
     }
-    else {
-      if(cuser[0][12] != 'U') {
-        this.router.navigate(['forbidden']);
+    else {  
+      switch(cuser['class']) {
+        case 'U':
+          break;
+        default:
+          this.router.navigate(['forbidden']);
+          break;
       }
-      this.categoryService.getCategories().subscribe((res:[]) => {
-        this.categories = res;
-      });
-      console.log("usuario logueado clase: ", cuser[0][12]);
     }
+  }
+
+  ngOnInit(): void {
+    this.accessPage();
+    this.categoryService.getCategories().subscribe((res:[]) => {
+      this.categories = res;
+    });
   }
 
 }

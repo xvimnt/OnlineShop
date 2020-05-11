@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { UserService } from "../../Services/user.service";
+import {Router} from '@angular/router';
 import Swal from 'sweetalert2'
 
 @Component({
@@ -20,9 +21,27 @@ export class UsercrudComponent implements OnInit {
   selected: boolean;
   selectedUser: string;
 
-  constructor(public crudService: UserService, private changeDetectorRefs: ChangeDetectorRef) { }
+  constructor(private router:Router, public crudService: UserService, private changeDetectorRefs: ChangeDetectorRef) { }
+  
+  accessPage() {
+    let cuser = this.crudService.getCurrentUser();
+    //console.log(cuser);
+    if(cuser == null) {
+      this.router.navigate(['/']);
+    }
+    else {  
+      switch(cuser['class']) {
+        case 'A':
+          break;
+        default:
+          this.router.navigate(['forbidden']);
+          break;
+      }
+    }
+  }
 
   ngOnInit(): void {
+    this.accessPage();
     this.getTable();
     this.clean();
   }

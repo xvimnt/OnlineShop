@@ -10,20 +10,26 @@ import {Router} from '@angular/router';
 export class MainPageComponent implements OnInit {
 
   constructor( public userService:UserService, private router:Router ) { }
-
-  ngOnInit(): void {
+  
+  accessPage() {
     let cuser = this.userService.getCurrentUser();
     //console.log(cuser);
     if(cuser != null) {
-      switch(cuser[0][12]) {
-        case "A":
+      switch(cuser['class']) {
+        case 'U':
+          this.router.navigate(['shop']);
+          break;
+        case 'A':
           this.router.navigate(['admin']);
           break;
-          case "U":
-          this.router.navigate(['shop']);
+        default:
+          this.router.navigate(['forbidden']);
           break;
       }
     }
+  }
+  ngOnInit(): void {
+    this.accessPage();
   }
 
 }

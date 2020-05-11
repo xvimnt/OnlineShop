@@ -24,4 +24,9 @@ router.post('/addHierarchy', cat_routes.addHierarchy);
 router.get('/getCategories', cat_routes.getCategories);
 router.post('/getCategory', cat_routes.getCategory);
 
+// Endpoints de reportes
+const rep_routes = require("../controllers/query.ctl.js");
+router.post('/secondReport', rep_routes.secondReport);
+router.post('/thirdReport', rep_routes.thirdReport);
+router.post('/tenthReport', rep_routes.tenthReport);
 module.exports = router;

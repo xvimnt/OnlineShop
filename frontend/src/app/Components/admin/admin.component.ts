@@ -16,18 +16,25 @@ export class AdminComponent implements OnInit {
 
   constructor(private router:Router, public catService:CategoryService, public userService:UserService, public prodService: ProductService, private papa: Papa) { }
 
-  ngOnInit(): void {
+  accessPage() {
     let cuser = this.userService.getCurrentUser();
     //console.log(cuser);
     if(cuser == null) {
       this.router.navigate(['/']);
     }
-    else {
-      if(cuser[0][12] != 'A') {
-        this.router.navigate(['forbidden']);
+    else {  
+      switch(cuser['class']) {
+        case 'A':
+          break;
+        default:
+          this.router.navigate(['forbidden']);
+          break;
       }
-      console.log("usuario logueado clase: ", cuser[0][12]);
     }
+  }
+
+  ngOnInit(): void {
+    this.accessPage();
   }
 
   timestamp() {
@@ -92,6 +99,12 @@ export class AdminComponent implements OnInit {
         complete: (result) => {
           // Agregar producto por producto
           for(var i = 1; i<result.data.length; i++) {
+            // Agregar producto a la base de datos
+            this.prodService.InsertProduct(result.data[i][2], (result.data[i][0]).trim(),result.data[i][1],
+              result.data[i][4], result.data[i][5], result.data[i][6], this.timestamp())
+              .subscribe((res: []) => {
+                console.log(res);
+              });
             // Insert the categories
             var catArray = result.data[i][3].split('-');
             // Verify the existence of each category
@@ -100,19 +113,13 @@ export class AdminComponent implements OnInit {
               this.catService.InsertCategory(catArray[j].trim(), '').subscribe((res:[]) => {
                 console.log(res);
               });
-              // Agregar la relacion con los productos
-              this.prodService.addRelation(result.data[i][0],catArray[j].trim()).subscribe((res:[]) => {
+              // Agregar la relacion entre Los productos
+              this.prodService.addRelation((result.data[i][0]).trim(),catArray[j].trim()).subscribe((res:[]) => {
                 console.log(res);
               });
             }
             // Agregar la jeraquia entre ellas
             this.addHierarchy(catArray);
-            // Agregar producto a la base de datos
-            this.prodService.InsertProduct(result.data[i][2], result.data[i][0],result.data[i][1],
-              result.data[i][4], result.data[i][5], result.data[i][6], this.timestamp())
-              .subscribe((res: []) => {
-                console.log(res);
-              });
           }
         }
       });

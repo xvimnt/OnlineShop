@@ -73,9 +73,28 @@ controller.getUser = async (req,res) => {
   sql = 'select * from "user" where user_email = :email and user_key = :password';
 
   let result = await bd.Open(sql,[email,password],true);
+
+  let item = {};
+
+  if(result.rows.length) {
+    item = {
+      "firstname": result.rows[0][0],
+      "lastname": result.rows[0][1],
+      "password": result.rows[0][2],
+      "email": result.rows[0][3],
+      "tel": result.rows[0][4],
+      "genre": result.rows[0][6],
+      "birthdate": result.rows[0][7],
+      "regday": result.rows[0][8],
+      "dir": result.rows[0][9],
+      "credit": result.rows[0][10],
+      "earns": result.rows[0][11],
+      "class": result.rows[0][12],
+      "disp": result.rows[0][13]
+   }
+  }
   
-  // regresar usuario
-  res.json(result.rows);
+  res.json(item);
 }
 
 function sendConfirmationEmail(email,name,token)
